@@ -21,7 +21,7 @@ function Index() {
 
   const fetchCities = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/cities');
+      const response = await axios.get('https://fugitive-capture-game-ute4.onrender.com/cities');
       setCities(response.data);
     } catch (error) {
      // console.error('Error fetching cities:', error);
@@ -30,7 +30,7 @@ function Index() {
 
   const fetchVehicles = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/vehicles');
+      const response = await axios.get('https://fugitive-capture-game-ute4.onrender.com/vehicles');
       setVehicles(response.data);
     } catch (error) {
       //console.error('Error fetching vehicles:', error);
@@ -121,7 +121,7 @@ function Index() {
     }
   
     try {
-      const response = await axios.post('http://localhost:8000/capture', copSelections);
+      const response = await axios.post('https://fugitive-capture-game-ute4.onrender.com/capture', copSelections);
       setCaptureStatus(response.data.message);
     } catch (error) {
       // console.error('Error:', error);
