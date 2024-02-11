@@ -2,17 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Base URL for the Render-hosted backend
+const BASE_URL = 'https://fugitive-capture-game-ute4.onrender.com';
+
 // Async thunk for fetching cities
 export const getCities = createAsyncThunk(
   'cities/getCities',
   async () => {
     try {
-      const response = await axios.get('https://fugitive-capture-game-ute4.onrender.com/cities/cities');
+      const response = await axios.get(`${BASE_URL}/cities`);
       return response.data;
     } catch (error) {
       throw new Error('Failed to fetch cities');
     }
-  }      
+  }
 );
 
 // Async thunk for adding a new city
@@ -20,7 +23,7 @@ export const addCity = createAsyncThunk(
   'cities/addCity',
   async (cityData) => {
     try {
-      const response = await axios.post('https://fugitive-capture-game-ute4.onrender.com/cities/cities', cityData);
+      const response = await axios.post(`${BASE_URL}/cities`, cityData);
       return response.data;
     } catch (error) {
       throw new Error('Failed to add city');
@@ -30,24 +33,23 @@ export const addCity = createAsyncThunk(
 
 // Async thunk for updating a city
 export const updateCity = createAsyncThunk(
-    'cities/updateCity',
-    async ({ id, cityData }) => {
-      try {
-        const response = await axios.put(`https://fugitive-capture-game-ute4.onrender.com/cities/cities/${id}`, cityData);
-        return response.data;
-      } catch (error) {
-        throw new Error('Failed to update city');
-      }
+  'cities/updateCity',
+  async ({ id, cityData }) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/cities/${id}`, cityData);
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to update city');
     }
-  );
-  
+  }
+);
 
 // Async thunk for deleting a city
 export const deleteCity = createAsyncThunk(
   'cities/deleteCity',
   async (id) => {
     try {
-      await axios.delete(`https://fugitive-capture-game-ute4.onrender.com/cities/cities/${id}`);
+      await axios.delete(`${BASE_URL}/cities/${id}`);
       return id;
     } catch (error) {
       throw new Error('Failed to delete city');

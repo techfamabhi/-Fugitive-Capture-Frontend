@@ -1,12 +1,15 @@
+// slice/vehicleSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+const BASE_URL = 'https://fugitive-capture-game-ute4.onrender.com'; // Define base URL
 
 export const getVehicles = createAsyncThunk(
     'vehicles/getVehicles',
     async () => {
       try {
-        const response = await axios.get('https://fugitive-capture-game-ute4.onrender.com/cities/vehicles');
+        const response = await axios.get(`${BASE_URL}/vehicles`); // Update URL
         return response.data;
       } catch (error) {
         throw new Error('Failed to fetch vehicles');
@@ -14,11 +17,11 @@ export const getVehicles = createAsyncThunk(
     }
   );
   
-  export const fetchVehicle = createAsyncThunk(
+export const fetchVehicle = createAsyncThunk(
     'vehicles/fetchVehicle',
     async (id) => {
       try {
-        const response = await axios.get(`https://fugitive-capture-game-ute4.onrender.com/cities/vehicles/${id}`);
+        const response = await axios.get(`${BASE_URL}/vehicles/${id}`); // Update URL
         return response.data;
       } catch (error) {
         throw new Error('Failed to fetch vehicle');
@@ -26,13 +29,11 @@ export const getVehicles = createAsyncThunk(
     }
   );
 
-
-
 export const addVehicle = createAsyncThunk(
   'vehicles/addVehicle',
   async (vehicleData) => {
     try {
-      const response = await axios.post('https://fugitive-capture-game-ute4.onrender.com/cities/vehicles', vehicleData);
+      const response = await axios.post(`${BASE_URL}/vehicles`, vehicleData); // Update URL
       return response.data;
     } catch (error) {
       throw new Error('Failed to add vehicle');
@@ -44,7 +45,7 @@ export const updateVehicle = createAsyncThunk(
     'vehicles/updateVehicle',
     async ({ id, vehicleData }) => {
       try {
-        const response = await axios.put(`https://fugitive-capture-game-ute4.onrender.com/cities/vehicles/${id}`, vehicleData);
+        const response = await axios.put(`${BASE_URL}/vehicles/${id}`, vehicleData); // Update URL
         return response.data;
       } catch (error) {
         throw new Error('Failed to update vehicle');
@@ -56,7 +57,7 @@ export const deleteVehicle = createAsyncThunk(
   'vehicles/deleteVehicle',
   async (id) => {
     try {
-      await axios.delete(`https://fugitive-capture-game-ute4.onrender.com/cities/vehicles/${id}`);
+      await axios.delete(`${BASE_URL}/vehicles/${id}`); // Update URL
       return id;
     } catch (error) {
       throw new Error('Failed to delete vehicle');
